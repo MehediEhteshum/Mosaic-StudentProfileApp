@@ -10,6 +10,7 @@ const Student = (props) => {
             Email: {email}<br />
             Comapny: {company}<br />
             Skill: {skill}<br />
+            {/* calculating avg grade = grades.reduce/grades.length */}
             Average: {grades.reduce((acc, curr) => {
                 return parseFloat(acc) + parseFloat(curr);
             }) / grades.length}%<br /><br />

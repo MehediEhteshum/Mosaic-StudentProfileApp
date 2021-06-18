@@ -1,0 +1,7 @@
+#error-card-title {
+    color: red;
+}
+
+#error-card-shadow {
+    box-shadow: 0.3rem 0.3rem 1rem 0.2rem rgba(128, 128, 128, 0.3);
+}
