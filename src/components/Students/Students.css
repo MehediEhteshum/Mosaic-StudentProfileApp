@@ -1,7 +1,10 @@
 #error-card-title {
     color: red;
+    font-weight: bold;
 }
 
-#error-card-shadow {
+#error-card {
+    width: 30rem;
+    font-family: 'Raleway', sans-serif;
     box-shadow: 0.3rem 0.3rem 1rem 0.2rem rgba(128, 128, 128, 0.3);
 }

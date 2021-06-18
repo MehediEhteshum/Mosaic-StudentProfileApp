@@ -33,10 +33,10 @@ const Students = () => {
             {
                 hasError ?
                     <div className="d-flex justify-content-center p-4">
-                        <Card id="error-card-shadow" style={{ width: '30rem' }}>
+                        <Card id="error-card">
                             <Card.Body>
                                 <Card.Title id="error-card-title">Error: {error}</Card.Title>
-                                <Card.Subtitle className="mb-2 text-muted">Please check your internet connection and try again later.</Card.Subtitle>
+                                <Card.Subtitle className="mb-2">Please check your internet connection and try again later.</Card.Subtitle>
                             </Card.Body>
                         </Card>
                     </div>
