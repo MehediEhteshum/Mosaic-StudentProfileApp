@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Card from 'react-bootstrap/Card';
 
-import Student from '../Student/Student';
+import { StudentProvider } from '../StudentProvider/StudentProvider';
 import './Students.css';
 
 const Students = () => {
@@ -42,7 +42,7 @@ const Students = () => {
                     </div>
                     :
                     students.map((student) => {
-                        return <Student student={student} />;
+                        return <StudentProvider student={student} />;
                     })
             }
         </div>
