@@ -4,11 +4,11 @@ import { faPlusSquare, faMinusSquare } from '@fortawesome/free-solid-svg-icons';
 
 import { StudentContext } from '../StudentProvider/StudentProvider';
 import Grades from '../Grades/Grades';
+import StudentTag from '../StudentTag/StudentTag';
 import './StudentCard.scss';
 
 const StudentCard = () => {
     const student = useContext(StudentContext);
-    console.log(student);
     const { id, firstName, lastName, pic, email, company, skill, grades } = student;
     let buttons = [faPlusSquare, faMinusSquare];
     const [btnNum, setBtnNum] = useState(0);
@@ -38,6 +38,7 @@ const StudentCard = () => {
                             }) / grades.length}%
                         </p>
                         <Grades />
+                        <StudentTag />
                     </div>
                     <div className="col-3 d-flex justify-content-end">
                         <FontAwesomeIcon id="btn-ico" icon={buttons[btnNum]} size='2x' onClick={buttonOnClick} />
