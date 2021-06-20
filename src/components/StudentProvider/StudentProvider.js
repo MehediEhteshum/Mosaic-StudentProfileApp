@@ -1,6 +1,5 @@
 import React, { createContext } from 'react';
 
-import './StudentProvider.scss';
 import StudentCard from '../StudentCard/StudentCard';
 
 export const StudentContext = createContext();

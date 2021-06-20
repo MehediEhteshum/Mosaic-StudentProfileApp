@@ -4,6 +4,7 @@ import { faPlusSquare, faMinusSquare } from '@fortawesome/free-solid-svg-icons';
 
 import { StudentContext } from '../StudentProvider/StudentProvider';
 import Grades from '../Grades/Grades';
+import './StudentCard.scss';
 
 const StudentCard = () => {
     const student = useContext(StudentContext);
@@ -19,7 +20,7 @@ const StudentCard = () => {
     }
 
     return (
-        <div className="card mt-2 mb-2" id="student-card">
+        <div className="card mt-3 mb-3" id="student-card">
             <div className="row m-1">
                 <div className="col-sm-3 d-flex justify-content-center pt-3">
                     <img src={pic} alt={`${firstName} ${lastName}'s`} />
@@ -34,7 +35,7 @@ const StudentCard = () => {
                             {/* calculating avg grade = grades.reduce/grades.length */}
                             Average: {grades.reduce((acc, curr) => {
                                 return parseFloat(acc) + parseFloat(curr);
-                            }) / grades.length}%<br /><br />
+                            }) / grades.length}%
                         </p>
                         <Grades />
                     </div>
