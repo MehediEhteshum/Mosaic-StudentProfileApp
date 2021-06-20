@@ -28,7 +28,7 @@ const StudentCard = () => {
                 <div className="card-body row col-sm-7 m-1">
                     <div className="col-9">
                         <h5 className="card-title" id="student-card-title">{firstName} {lastName}</h5>
-                        <p className="card-text">
+                        <div className="card-text">
                             Email: {email}<br />
                             Comapny: {company}<br />
                             Skill: {skill}<br />
@@ -36,7 +36,7 @@ const StudentCard = () => {
                             Average: {grades.reduce((acc, curr) => {
                                 return parseFloat(acc) + parseFloat(curr);
                             }) / grades.length}%
-                        </p>
+                        </div>
                         <Grades />
                         <StudentTag />
                     </div>
