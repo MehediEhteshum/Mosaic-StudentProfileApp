@@ -68,8 +68,8 @@ const StudentTags = () => {
                     })
                 }
             </div>
-            <form id={`tag-form-${id}`} onSubmit={(e) => onSubmitTagInput(e)} style={{ marginTop: "0.5rem" }}>
-                <input id={`tag-input-${id}`} type="text" placeholder="Add a tag" style={{ border: "none", borderBottom: "1px solid" }} value={tagInputVal} onFocus={(e) => onFocusTagInput(e.target.id)} onBlur={(e) => onBlurTagInput(e.target.id)} onChange={(e) => onChangeTagInput(e)}></input>
+            <form className="tag-form" id={`tag-form-${id}`} onSubmit={(e) => onSubmitTagInput(e)} style={{ marginTop: "0.5rem" }}>
+                <input id={`tag-input-${id}`} type="text" placeholder="Add a tag" style={{ border: "none", borderBottom: "1px solid" }} value={tagInputVal} onFocus={(e) => onFocusTagInput(e.target.id)} onBlur={(e) => onBlurTagInput(e.target.id)} onChange={(e) => onChangeTagInput(e)} />
             </form>
         </div>
     );

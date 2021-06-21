@@ -9,11 +9,11 @@ import Home from './components/Home/Home';
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/" component={Home} />
-      </Switch>
-    </Router>
+        <Router>
+          <Switch>
+            <Route exact path="/" component={Home} />
+          </Switch>
+        </Router>
   );
 }
 

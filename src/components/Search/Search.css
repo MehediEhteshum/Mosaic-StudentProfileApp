@@ -1,0 +1,11 @@
+.search-input {
+    border: none;
+    border-bottom: 1px solid;
+}
+
+@media (max-width: 280px) {
+    .search-input {
+        width: 8rem;
+        /* when screen size < 280px */
+    }
+}

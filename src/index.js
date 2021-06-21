@@ -5,13 +5,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { StudentsDataProvider } from './components/StudentsDataProvider/StudentsDataProvider';
 import { StudentTagsProvider } from './components/StudentTagsProvider/StudentTagsProvider';
 
 ReactDOM.render(
   <React.StrictMode>
-    <StudentTagsProvider>
-      <App />
-    </StudentTagsProvider>
+    <StudentsDataProvider>
+      <StudentTagsProvider>
+        <App />
+      </StudentTagsProvider>
+    </StudentsDataProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

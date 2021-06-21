@@ -1,32 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import Card from 'react-bootstrap/Card';
 
+import { StudentsDataContext } from '../StudentsDataProvider/StudentsDataProvider';
 import { StudentProvider } from '../StudentProvider/StudentProvider';
+import Search from '../Search/Search';
 import './Students.css';
 
 const Students = () => {
-    // fetching students from api
-    const url_students = "https://api.hatchways.io/assessment/students";
-    const [students, setStudents] = useState([]);
-    const [hasError, setHasError] = useState(false);
-    const [error, setError] = useState("");
-
-    useEffect(() => {
-        fetch(url_students).then((res) => {
-            if (res.ok) {
-                // if res status ok
-                return res.json();
-            } else {
-                throw Error(`Error ${res.status}`);
-            }
-        }).then((data) => {
-            setStudents(data.students); // setting students list
-        }).catch((err) => {
-            setHasError(true); // setting error status
-            setError(String(err));
-            console.error(err);
-        });
-    }, []);
+    const [studentsData, hasError, error] = useContext(StudentsDataContext);
 
     return (
         <div>
@@ -41,11 +22,19 @@ const Students = () => {
                         </Card>
                     </div>
                     :
-                    students.map((student) => {
-                        return <StudentProvider student={student} />;
-                    })
+                    studentsData.length > 0 ?
+                        <div>
+                            <Search />
+                            {studentsData.map((student) => {
+                                return <div>
+                                    <StudentProvider student={student} />
+                                </div>;
+                            })}
+                        </div> :
+                        <div></div>
+
             }
-        </div>
+        </div >
     );
 };
 
