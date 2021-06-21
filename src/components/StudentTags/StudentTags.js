@@ -4,9 +4,9 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import { StudentContext } from '../StudentProvider/StudentProvider';
 import { StudentTagsContext } from '../StudentTagsProvider/StudentTagsProvider';
-import './StudentTag.scss';
+import './StudentTags.scss';
 
-const StudentTag = () => {
+const StudentTags = () => {
     const student = useContext(StudentContext);
     const [allTags, setAllTags] = useContext(StudentTagsContext);
     const { id } = student;
@@ -36,24 +36,34 @@ const StudentTag = () => {
         let tag = e.target[0].defaultValue; // tag value
         if (Object.keys(allTags).length !== 0 && allTags[id] !== undefined) {
             // tags not empty and key 'student id' exists. Note: hasOwnProperty is slower
-            allTags[id].add(tag);
+            allTags[id].add(tag); // add to current student tags set
         } else {
             // tags empty
-            allTags[id] = new Set().add(tag);
+            allTags[id] = new Set().add(tag); // create new current student tags set
         }
-        setAllTags(allTags); // update student tags map
+        setAllTags(allTags); // update all student tags map
         setThisTags([...allTags[id]]); // set current student tags
 
         setTagInputVal(""); // reset input field value
+    }
+
+    function onClickCross(e) {
+        if (e.target.nearestViewportElement !== null) {
+            let tag = e.target.nearestViewportElement.previousSibling.innerText;
+            allTags[id].delete(tag); // delete from current student's tags set
+            setAllTags(allTags); // update all student tags map
+            setThisTags([...allTags[id]]); // set current student tags
+        }
     }
 
     return (
         <div>
             <div className="row d-flex justify-content-start m-auto" id={`tags-div-${id}`}>
                 {
-                    thisTags.map((tag) => {
-                        return <div className="col-auto px-2 py-1 mt-2" id="tag-div">
-                            {tag}<FontAwesomeIcon id="cross-ico" icon={faTimes} />
+                    thisTags.map((tag, i) => {
+                        return <div className="col-auto px-2 py-1 mt-2 tag-div" id={`tag-div-${i}`}>
+                            <span>{tag}</span>
+                            <FontAwesomeIcon className="cross-ico" id={`cross-ico-${i}`} icon={faTimes} onClick={(e) => onClickCross(e)} />
                         </div>;
                     })
                 }
@@ -65,4 +75,4 @@ const StudentTag = () => {
     );
 };
 
-export default StudentTag;
+export default StudentTags;

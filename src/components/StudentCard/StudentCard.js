@@ -4,7 +4,7 @@ import { faPlusSquare, faMinusSquare } from '@fortawesome/free-solid-svg-icons';
 
 import { StudentContext } from '../StudentProvider/StudentProvider';
 import Grades from '../Grades/Grades';
-import StudentTag from '../StudentTag/StudentTag';
+import StudentTags from '../StudentTags/StudentTags';
 import './StudentCard.scss';
 
 const StudentCard = () => {
@@ -13,7 +13,7 @@ const StudentCard = () => {
     let buttons = [faPlusSquare, faMinusSquare];
     const [btnNum, setBtnNum] = useState(0);
 
-    function buttonOnClick() {
+    function onClickPlusMinus() {
         let i = (btnNum + 1) % 2;
         setBtnNum(i);
         document.getElementById(`grades-div-${id}`).style.display = i ? "block" : "none";
@@ -38,10 +38,10 @@ const StudentCard = () => {
                             }) / grades.length}%
                         </div>
                         <Grades />
-                        <StudentTag />
+                        <StudentTags />
                     </div>
                     <div className="col-3 d-flex justify-content-end">
-                        <FontAwesomeIcon id="btn-ico" icon={buttons[btnNum]} size='2x' onClick={buttonOnClick} />
+                        <FontAwesomeIcon id="btn-ico" icon={buttons[btnNum]} size='2x' onClick={onClickPlusMinus} />
                     </div>
                 </div>
             </div>

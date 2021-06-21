@@ -3,13 +3,14 @@
     border-bottom: 1px solid;
 }
 
-#tag-div {
+.tag-div {
     background-color: rgba(192, 192, 192, 0.7);
     border-radius: 0.3rem;
     margin-inline-end: 0.5rem;
 }
 
-#cross-ico {
+.cross-ico {
     color: grey;
     margin-left: 0.5rem;
+    border: 1px red solid;
 }
