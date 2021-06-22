@@ -29,7 +29,7 @@ const Students = () => {
                         {
                             searchedStudents.length > 0 ?
                                 searchedStudents.map((student) => {
-                                    return <div>
+                                    return <div key={student.id}>
                                         <StudentProvider student={student} />
                                     </div>;
                                 }) :

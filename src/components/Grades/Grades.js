@@ -17,7 +17,7 @@ const Grades = () => {
                 </thead>
                 <tbody>
                     {grades.map((g, i) => {
-                        return <tr>
+                        return <tr key={i}>
                             <th>Test {i + 1}</th>
                             <td>{g}%</td>
                         </tr>;
