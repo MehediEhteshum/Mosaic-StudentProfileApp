@@ -1,6 +1,6 @@
 import React, { createContext, useState } from 'react';
 
-import Students from '../Students/Students';
+import { SearchedStudentsProvider } from '../SearchedStudentsProvider/SearchedStudentsProvider';
 
 export const StudentTagsContext = createContext();
 
@@ -9,7 +9,7 @@ export const StudentTagsProvider = () => {
 
     return (
         <StudentTagsContext.Provider value={[allTags, setAllTags]}>
-            <Students />
+            <SearchedStudentsProvider />
         </StudentTagsContext.Provider>
     );
 };

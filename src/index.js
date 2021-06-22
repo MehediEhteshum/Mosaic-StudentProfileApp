@@ -5,14 +5,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { StudentsDataProvider } from './components/StudentsDataProvider/StudentsDataProvider';
-import { StudentTagsProvider } from './components/StudentTagsProvider/StudentTagsProvider';
+import { StudentsDataProvider } from './providers/StudentsDataProvider/StudentsDataProvider';
+import { StudentTagsProvider } from './providers/StudentTagsProvider/StudentTagsProvider';
+import { SearchedStudentsProvider } from './providers/SearchedStudentsProvider/SearchedStudentsProvider';
 
 ReactDOM.render(
   <React.StrictMode>
     <StudentsDataProvider>
       <StudentTagsProvider>
-        <App />
+        <SearchedStudentsProvider>
+          <App />
+        </SearchedStudentsProvider>
       </StudentTagsProvider>
     </StudentsDataProvider>
   </React.StrictMode>,

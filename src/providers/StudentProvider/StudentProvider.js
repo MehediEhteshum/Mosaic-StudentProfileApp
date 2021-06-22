@@ -1,6 +1,6 @@
 import React, { createContext } from 'react';
 
-import StudentCard from '../StudentCard/StudentCard';
+import StudentCard from '../../components/StudentCard/StudentCard';
 
 export const StudentContext = createContext();
 
@@ -9,9 +9,7 @@ export const StudentProvider = (props) => {
 
     return (
         <StudentContext.Provider value={student}>
-            <div className="d-flex justify-content-center">
                 <StudentCard />
-            </div>
         </StudentContext.Provider>
     );
 };

@@ -1,13 +1,15 @@
 import React, { useContext } from 'react';
 import Card from 'react-bootstrap/Card';
 
-import { StudentsDataContext } from '../StudentsDataProvider/StudentsDataProvider';
-import { StudentProvider } from '../StudentProvider/StudentProvider';
+import { StudentsDataContext } from '../../providers/StudentsDataProvider/StudentsDataProvider';
+import { StudentProvider } from '../../providers/StudentProvider/StudentProvider';
+import { SearchedStudentsContext } from '../../providers/SearchedStudentsProvider/SearchedStudentsProvider';
 import Search from '../Search/Search';
 import './Students.css';
 
 const Students = () => {
-    const [studentsData, hasError, error] = useContext(StudentsDataContext);
+    const { hasError, error } = useContext(StudentsDataContext);
+    const { searchedStudents } = useContext(SearchedStudentsContext);
 
     return (
         <div>
@@ -22,16 +24,18 @@ const Students = () => {
                         </Card>
                     </div>
                     :
-                    studentsData.length > 0 ?
-                        <div>
-                            <Search />
-                            {studentsData.map((student) => {
-                                return <div>
-                                    <StudentProvider student={student} />
-                                </div>;
-                            })}
-                        </div> :
-                        <div></div>
+                    <div>
+                        <Search />
+                        {
+                            searchedStudents.length > 0 ?
+                                searchedStudents.map((student) => {
+                                    return <div>
+                                        <StudentProvider student={student} />
+                                    </div>;
+                                }) :
+                                <div></div>
+                        }
+                    </div>
 
             }
         </div >

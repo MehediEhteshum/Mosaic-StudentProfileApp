@@ -29,7 +29,7 @@ export const StudentsDataProvider = () => {
     }, []);
 
     return (
-        <StudentsDataContext.Provider value={[studentsData, hasError, error]}>
+        <StudentsDataContext.Provider value={{ "studentsData": studentsData, "hasError": hasError, "error": error }}>
             <StudentTagsProvider />
         </StudentsDataContext.Provider>
     );

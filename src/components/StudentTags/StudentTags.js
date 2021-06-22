@@ -2,8 +2,8 @@ import React, { useContext, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
-import { StudentContext } from '../StudentProvider/StudentProvider';
-import { StudentTagsContext } from '../StudentTagsProvider/StudentTagsProvider';
+import { StudentContext } from '../../providers/StudentProvider/StudentProvider';
+import { StudentTagsContext } from '../../providers/StudentTagsProvider/StudentTagsProvider';
 import './StudentTags.scss';
 
 const StudentTags = () => {
@@ -11,7 +11,6 @@ const StudentTags = () => {
     const [allTags, setAllTags] = useContext(StudentTagsContext);
     const { id } = student;
     const [tagInputVal, setTagInputVal] = useState("");
-    const [thisTags, setThisTags] = useState([]); // current student tags
 
     function onFocusTagInput(inputId) {
         // highlighting the tag input area
@@ -34,15 +33,18 @@ const StudentTags = () => {
         // getting tag value
         e.preventDefault(); // prevent refresh on 'enter'
         let tag = e.target[0].defaultValue; // tag value
-        if (Object.keys(allTags).length !== 0 && allTags[id] !== undefined) {
-            // tags not empty and key 'student id' exists. Note: hasOwnProperty is slower
-            allTags[id].add(tag); // add to current student tags set
+        let tempAllTags = { ...allTags }; // creating temp copy of state
+        if (tempAllTags[id] !== undefined) {
+            // key 'student id' exists. Note: hasOwnProperty is slower
+            if (!tempAllTags[id].includes(tag)) {
+                // tag is not in the array
+                tempAllTags[id].push(tag); // add to current student tags array
+            }
         } else {
             // tags empty
-            allTags[id] = new Set().add(tag); // create new current student tags set
+            tempAllTags[id] = [tag]; // create new current student tags array
         }
-        setAllTags(allTags); // update all student tags map
-        setThisTags([...allTags[id]]); // set current student tags
+        setAllTags(tempAllTags); // update all student tags object
 
         setTagInputVal(""); // reset input field value
     }
@@ -50,26 +52,29 @@ const StudentTags = () => {
     function onClickCross(e) {
         if (e.target.nearestViewportElement !== null) {
             let tag = e.target.nearestViewportElement.previousSibling.innerText;
-            allTags[id].delete(tag); // delete from current student's tags set
-            setAllTags(allTags); // update all student tags map
-            setThisTags([...allTags[id]]); // set current student tags
+            let tempAllTags = { ...allTags }; // creating temp copy of state
+            tempAllTags[id].splice(tempAllTags[id].indexOf(tag), 1); // delete from current student's tags array
+            setAllTags(tempAllTags); // update all student tags object
         }
     }
 
     return (
         <div>
-            <div className="row d-flex justify-content-start m-auto" id={`tags-div-${id}`}>
-                {
-                    thisTags.map((tag, i) => {
-                        return <div className="col-auto px-2 py-1 mt-2 tag-div" id={`tag-div-${i}`}>
-                            <span>{tag}</span>
-                            <FontAwesomeIcon className="cross-ico" id={`cross-ico-${i}`} icon={faTimes} onClick={(e) => onClickCross(e)} />
-                        </div>;
-                    })
-                }
-            </div>
+            {allTags[id] !== undefined ?
+                <div className="row d-flex justify-content-start m-auto" id={`tags-div-${id}`}>
+                    {
+                        allTags[id].map((tag, i) => {
+                            return <div className="col-auto px-2 py-1 mt-2 tag-div" id={`tag-div-${i}`}>
+                                <span>{tag}</span>
+                                <FontAwesomeIcon className="cross-ico" id={`cross-ico-${i}`} icon={faTimes} onClick={(e) => onClickCross(e)} />
+                            </div>;
+                        })
+                    }
+                </div> :
+                <div></div>
+            }
             <form className="tag-form" id={`tag-form-${id}`} onSubmit={(e) => onSubmitTagInput(e)} style={{ marginTop: "0.5rem" }}>
-                <input id={`tag-input-${id}`} type="text" placeholder="Add a tag" style={{ border: "none", borderBottom: "1px solid" }} value={tagInputVal} onFocus={(e) => onFocusTagInput(e.target.id)} onBlur={(e) => onBlurTagInput(e.target.id)} onChange={(e) => onChangeTagInput(e)} />
+                <input id={`tag-input-${id}`} type="text" placeholder="Add a tag" style={{ border: "none", borderBottom: "1px solid" }} value={tagInputVal} onFocus={(e) => onFocusTagInput(e.target.id)} onBlur={(e) => onBlurTagInput(e.target.id)} onChange={(e) => onChangeTagInput(e)} required />
             </form>
         </div>
     );
